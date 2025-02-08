@@ -30,21 +30,16 @@ function addToDoItem() {
 function deleteToDoItem(id) {
   const result = list.value.filter((item) => item.id !== id)
   list.value = result
-
-  // localStorage.removeItem(id) - можно удалить т.к. удаление идёт и так по id и saveUpdateList() сохраняет список целиком
   updateLocalStorage()
 }
 function updateItem(id,newItem) {
   const item = list.value.find(item => item.id === id)
   item.name = newItem.name
   item.task = newItem.task
-
-  // const stringifyItem = JSON.stringify(list.value)
-  // localStorage.setItem(localStorageKey,stringifyItem) - ниже saveUpdateList() уже сохраняет local и нет смысла сохранять еще раз
   updateLocalStorage()
 }
 
-function updateLocalStorage() { // переименовал функцию для большей ясности что обновляется. было saveUpdateList()
+function updateLocalStorage() {
   const stringifyList = JSON.stringify(list.value)
   localStorage.setItem(localStorageKey,stringifyList)
 }
@@ -56,4 +51,3 @@ onMounted(()=> {
 })
 </script>
 
-<!--рефактор этого чуда.-->
