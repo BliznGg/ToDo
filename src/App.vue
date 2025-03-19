@@ -1,5 +1,6 @@
 <template>
   <button @click="addToDoItem">Добавить задачу</button>
+  <p>Активных задач {{listCount}}</p>
   <ul>
       <ToDoItem v-for="toDoItem in list"
                 :key="toDoItem.id"
@@ -13,9 +14,10 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+import {ref, onMounted, computed} from 'vue'
 import ToDoItem from "./components/ToDoItem.vue";
 const list = ref([])
+const listCount = computed(()=> list.value.length);
 const localStorageKey = 'to-do-storage'
 
 function addToDoItem() {
